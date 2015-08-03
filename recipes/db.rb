@@ -27,13 +27,13 @@ bash 'run composer to grab extensions' do
 end
 
 # Run jocopo user auth plugin install first
-bash 'insert_db_laravel_authentication_extension' do
-  user 'root'
-  cwd "/var/www/#{node['laravel']['name']}"
-  code <<-EOH
-  yes | php artisan authentication:install
-  EOH
-end
+#bash 'insert_db_laravel_authentication_extension' do
+#  user 'root'
+#  cwd "/var/www/#{node['laravel']['name']}"
+#  code <<-EOH
+#  yes | php artisan authentication:install
+#  EOH
+#end
 
 # Run artisan migrate to setup the database and schema, then seed it
 bash 'insert_db_laravel' do
