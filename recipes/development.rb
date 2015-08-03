@@ -1,3 +1,6 @@
+# Install xdebug
+include_recipe "chef-php-extra::xdebug"
+
 bash 'run composer to grab extensions' do
   user 'root'
   cwd "/var/www/#{node['laravel']['name']}"
