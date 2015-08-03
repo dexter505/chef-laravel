@@ -18,13 +18,13 @@ ruby_block "create_#{node['laravel']['name']}_db" do
     action :create
 end
 
-bash 'run composer to grab extensions' do
-  user 'root'
-  cwd "/var/www/#{node['laravel']['name']}"
-  code <<-EOH
-  composer update
-  EOH
-end
+#bash 'run composer to grab extensions' do
+#  user 'root'
+#  cwd "/var/www/#{node['laravel']['name']}"
+#  code <<-EOH
+#  composer update
+#  EOH
+#end
 
 # Run jocopo user auth plugin install first
 #bash 'insert_db_laravel_authentication_extension' do
@@ -36,11 +36,11 @@ end
 #end
 
 # Run artisan migrate to setup the database and schema, then seed it
-bash 'insert_db_laravel' do
-  user 'root'
-  cwd "/var/www/#{node['laravel']['name']}"
-  code <<-EOH
-  php artisan migrate --env=development
-  php artisan db:seed --env=development
-  EOH
-end
+#bash 'insert_db_laravel' do
+#  user 'root'
+#  cwd "/var/www/#{node['laravel']['name']}"
+#  code <<-EOH
+#  php artisan migrate --env=development
+#  php artisan db:seed --env=development
+#  EOH
+#end
