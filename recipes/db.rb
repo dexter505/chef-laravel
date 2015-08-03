@@ -18,13 +18,13 @@ ruby_block "create_#{node['laravel']['name']}_db" do
     action :create
 end
 
-#bash 'run composer to grab extensions' do
-#  user 'root'
-#  cwd "/var/www/#{node['laravel']['name']}"
-#  code <<-EOH
-#  composer update
-#  EOH
-#end
+bash 'run composer to grab extensions' do
+  user 'root'
+  cwd "/var/www/#{node['laravel']['name']}"
+  code <<-EOH
+  composer update
+  EOH
+end
 
 # Run jocopo user auth plugin install first
 #bash 'insert_db_laravel_authentication_extension' do
