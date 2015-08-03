@@ -1,20 +1,26 @@
-# Since Vagrant on an NTFS host doesn't support symlinks properly
-directory "/var/www/condor/node_modules" do
-    recursive true
-    action :delete
-    not_if "test -L /var/www/condor/node_modules"
-    only_if { node['laravel']['symlink_npm'] }
+bash 'run composer to grab extensions' do
+  user 'root'
+  cwd "/var/www/#{node['laravel']['name']}"
+  code <<-EOH
+  composer update
+  EOH
 end
 
-directory "/tmp/node_modules" do
-    owner "vagrant"
-    group "vagrant"
-    only_if { node['laravel']['symlink_npm'] }
-end
+# Run jocopo user auth plugin install first
+#bash 'insert_db_laravel_authentication_extension' do
+#  user 'root'
+#  cwd "/var/www/#{node['laravel']['name']}"
+#  code <<-EOH
+#  yes | php artisan authentication:install
+#  EOH
+#end
 
-link "/var/www/condor/node_modules" do
-    owner "vagrant"
-    group "vagrant"
-    to "/tmp/node_modules"
-    only_if { node['laravel']['symlink_npm'] }
+# Run artisan migrate to setup the database and schema, then seed it
+bash 'insert_db_laravel' do
+  user 'root'
+  cwd "/var/www/#{node['laravel']['name']}"
+  code <<-EOH
+  php artisan migrate
+  php artisan db:seed
+  EOH
 end
