@@ -6,11 +6,11 @@ directory "/var/www/condor/node_modules" do
     only_if { node['laravel']['symlink_npm'] }
 end
 
-#directory "/tmp/node_modules" do
-#    owner "vagrant"
-#    group "vagrant"
-#    only_if { node['laravel']['symlink_npm'] }
-#end
+directory "/tmp/node_modules" do
+    owner "vagrant"
+    group "vagrant"
+    only_if { node['laravel']['symlink_npm'] }
+end
 
 link "/var/www/condor/node_modules" do
     owner "vagrant"
