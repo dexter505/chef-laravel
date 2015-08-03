@@ -34,9 +34,6 @@ end
 
 include_recipe "php"
 
-# Install xdebug
-include_recipe "chef-php-extra::xdebug"
-
 # Install Composer
 bash "composer" do
   code <<-EOH
