@@ -8,6 +8,15 @@
 # Makes sure apt is up to date
 include_recipe "apt"
 
+# Add repositories
+apt_repository "php" do
+	uri "http://ppa.launchpad.net/ondrej/php"
+	distribution node['lsb']['codename']
+	components ["main"]
+	keyserver "keyserver.ubuntu.com"
+	key "E5267A6C"
+end
+
 apt_repository 'apache2' do
 	uri 'http://ppa.launchpad.net/ondrej/apache2/ubuntu'
 	distribution node['lsb']['codename']
@@ -23,7 +32,7 @@ apache_module "authz_default" do
   enable false
 end
 
-include_recipe "php"
+#include_recipe "php"
 
 # Install Composer
 bash "composer" do
