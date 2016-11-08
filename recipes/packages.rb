@@ -8,15 +8,6 @@
 # Makes sure apt is up to date
 include_recipe "apt"
 
-# Add repositories
-apt_repository "php" do
-	uri "http://ppa.launchpad.net/ondrej/php/ubuntu"
-	distribution node['lsb']['codename']
-	components ["main"]
-	keyserver "keyserver.ubuntu.com"
-	key "E5267A6C"
-end
-
 # Install packages
 node['laravel']['packages'].each do |a_package|
   package a_package
