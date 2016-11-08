@@ -30,8 +30,8 @@ bash "install php and modules" do
   cwd "/var/www/#{node['laravel']['name']}"
   code <<-EOH
   add-apt-repository ppa:ondrej/php
-  apt-get update
-  apt-get install php5.6 php5.6-dev php5.6-cli php-pear php5.6-apcu php5.6-mysql php5.6-curl php5.6-mcrypt php5.6-memcached php5.6-gd php5.6-json
+  apt-get -y update
+  apt-get -y install php5.6 php5.6-dev php5.6-cli php-pear php5.6-apcu php5.6-mysql php5.6-curl php5.6-mcrypt php5.6-memcached php5.6-gd php5.6-json
   EOH
 end
 
